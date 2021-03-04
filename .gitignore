@@ -1,2 +1,5 @@
 vendor/
-idea/
+.idea/
+bootstrap-5.0.0-beta1-dist/*
+
+.idea
