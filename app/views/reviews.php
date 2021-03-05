@@ -13,18 +13,21 @@
                                 <div class="mb-3">
                                     <?php if(!empty($result['redactor'])) { ?>
                                         <div class="mb-3">Последний раз запись редактоировалась администратором <?= $result['redactor'] ?>,
-                                            <?= $result['updated_at'] ?> </div>
-                                        <div class="mb-3">
+                                            <?= $result['updated_at'] ?>
+                                        </div>
                                     <?php } ?>
+
                                     <?php if(!empty($result['message'])) { ?>
                                         <div class="mb-3">
-                                            <?= $result['message'] ?> </div>
-                                        <div class="mb-3">
+                                            <?= $result['message'] ?>
+                                        </div>
                                     <?php } ?>
+
                                     <div class="mb-3">
                                         <img src="<?= $result['file_tmp_name'].$result['name_image'] ?>"/>
                                     </div>
                                 </div>
+                            </div>
                         </li>
                         <hr>
                     <?php } ?>

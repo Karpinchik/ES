@@ -32,7 +32,7 @@ class Feedback
             $err[] = 'некорректный адрес';
         }
 
-        if(strlen($model->message) >40) {
+        if(strlen($model->message) >191) {
             $err[] = 'слишком длинное сообщение';
         }
 
@@ -49,6 +49,7 @@ class Feedback
      * */
     public function upload_image($upload_dir)
     {
+        // добавить иф для проверки формата
         if(isset($_FILES['image']) && !empty($_FILES['image'])) {
             $file_tmp_name = $_FILES['image']['tmp_name'];
             $name_img = $_FILES['image']['name'];
@@ -61,7 +62,6 @@ class Feedback
     public function resize_image($upload_dir, $name_img)
     {
         // добавить иф на размер
-
         $img = ImageManagerStatic::make("$upload_dir". $name_img);
         $img->resize(320, 240);
         $img->save("$upload_dir". $name_img);
@@ -95,8 +95,6 @@ VALUES (:name, :email, :message, :created_at, :name_image, :file_tmp_name)";
 
     }
 
-
-    //                ':update_at' => date("Y-m-d H:i:s"),
 
 
 }

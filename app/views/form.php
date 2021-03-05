@@ -42,12 +42,14 @@
             <div id="messageHelp" class="form-text">Введите сообщение</div>
         </div>
 
-        <div>
-            <input type="submit" name="btn_submit" class="btn btn-primary" value="Отправить">
-        </div>
+        <div class="mb-3 mt-3">
+            <div>
+                <input type="submit" name="btn_submit" class="btn btn-primary" value="Отправить">
+            </div>
 
-        <div class="mt-1">
-            <input type="submit" name="btn_submit" class="btn btn-primary" value="Пред просмотр">
+            <div class="mt-1">
+                <input type="submit" name="btn_submit" class="btn btn-primary" value="Пред просмотр">
+            </div>
         </div>
 
     </form>

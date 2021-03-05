@@ -2,25 +2,25 @@
 
 use \models\model\Model;
 use \controller\feedback\Feedback;
+use \controller\moderator\Moderator;
 
 require_once "vendor/autoload.php";
 require_once 'app/models/Model.php';
 require_once 'app/controllers/FeedBack.php';
+require_once 'app/controllers/Moderator.php';
 
 require_once 'app/config_db.php';
-$pdo = new PDO('mysql:host='. HOST .';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
 
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $results = Model::get_display_reviews($pdo);
-
+    $results = Moderator::get_display_reviews($pdo);
 }
+
 include 'app/views/header.php';
 include 'app/views/reviews.php';
 
 $err = array();
 $res = '';
 $upload_dir = 'app/uploads/';
-//$name_img = '';
 
 if($_POST['btn_submit']) {
 
@@ -44,6 +44,7 @@ if($_POST['btn_submit']) {
     } else {
         $err[] = 'ваш отзыв не записан в базу. Данные не прошли валидацию';
     }
+    echo "<script>window.location.replace('index.php');</script>";
 }
 
 include 'app/views/form.php';
