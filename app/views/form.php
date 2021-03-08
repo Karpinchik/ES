@@ -1,10 +1,3 @@
-<div class="container">
-    <div>
-
-    </div>
-</div>
-
-
 <div class="container mt-4">
     <h3>Form</h3>
     <?php if(isset($res) && !empty($res)) { ?>
@@ -47,12 +40,13 @@
                 <input type="submit" name="btn_submit" class="btn btn-primary" value="Отправить">
             </div>
 
-            <div class="mt-1">
-                <input type="submit" name="btn_submit" class="btn btn-primary" value="Пред просмотр">
-            </div>
         </div>
 
     </form>
+<!--    <div class="mt-1">-->
+<!--        <button class="btn btn-primary mb-4" id="btn_submit" type="button">предварительный просмотр</button>-->
+<!--    </div>-->
+
 </div>
 
 

@@ -10,12 +10,28 @@ use models\model\Model;
 
 class Feedback
 {
+    /**
+     * @var $width_img integer
+     */
+    public $width_img = 320;
+
+    /**
+     * @var $height_img integer
+     */
+    public $height_img = 240;
+
+    /**
+     * @var $mime_img array
+     */
+    public $mime_img = ['image/gif', 'image/png', 'image/jpg', 'image/jpeg'];
 
 
-    /*
+    /**
      * validating form
      *
-     * */
+     * @param $model object
+     * @return mixed
+     */
     public function data_validate($model)
     {
         if(empty($model->name) OR empty($model->email) OR empty($model->message)) {
@@ -43,34 +59,51 @@ class Feedback
         if(!empty($err)) return $err;
     }
 
+
     /**
      * upload image in server
      *
-     * */
+     * @param $upload_dir string
+     * @return mixed
+     */
     public function upload_image($upload_dir)
     {
-        // добавить иф для проверки формата
         if(isset($_FILES['image']) && !empty($_FILES['image'])) {
+
             $file_tmp_name = $_FILES['image']['tmp_name'];
-            $name_img = $_FILES['image']['name'];
-            move_uploaded_file($file_tmp_name, "$upload_dir". $name_img);
-            return $name_img;
-         }
+            $img_data = getimagesize($file_tmp_name);
+
+            if(in_array($img_data['mime'], $this->mime_img)) {
+                $name_img = $_FILES['image']['name'];
+                move_uploaded_file($file_tmp_name, "$upload_dir". $name_img);
+                return $name_img;
+            }
+        }
     }
 
 
+    /**
+     * @param $upload_dir string
+     * @param $name_img string
+     */
     public function resize_image($upload_dir, $name_img)
     {
-        // добавить иф на размер
-        $img = ImageManagerStatic::make("$upload_dir". $name_img);
-        $img->resize(320, 240);
-        $img->save("$upload_dir". $name_img);
+        $img = ImageManagerStatic::make("$upload_dir" . $name_img);
+
+        $img_data = getimagesize("$upload_dir" . $name_img);
+        if ($img_data[0] >= $this->width_img OR $img_data[1] >= $this->height_img) {
+            $img->resize(320, 240);
+            $img->save("$upload_dir" . $name_img);
+        }
     }
+
 
     /**
      * add review to DB
      *
-     *
+     * @param $model object
+     * @param $pdo object
+     * @return string
      */
     public function add_data($model, $pdo)
     {
@@ -90,11 +123,9 @@ VALUES (:name, :email, :message, :created_at, :name_image, :file_tmp_name)";
 
             return 'отзыв сохранен';
         } catch (PDOException $e) {
-            return 'отзыв не сохранен';
+            return 'отзыв не сохранен'.$e->getMessage();
         }
-
     }
-
 
 
 }

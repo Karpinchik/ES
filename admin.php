@@ -1,5 +1,5 @@
 <?php
-//use \models\model\Model;
+
 use controller\moderator\Moderator;
 
 $login_successful = false;
@@ -22,13 +22,11 @@ require_once 'app/config_db.php';
 require_once 'app/models/Model.php';
 require_once 'app/controllers/Moderator.php';
 
-//получаю все записи
 $results = Moderator::get_all_reviews($pdo);
 
 include './app/views/header.php';
 include './app/views/moderating.php';
 include './app/views/footer.php';
-
 
 
 if($_POST['btn-moderation'] == true ) {
@@ -43,8 +41,6 @@ if($_POST['btn-moderation'] == true ) {
         date("Y-m-d H:m:s")
     ];
 
-
     Moderator::change_review($id, $params, $pdo);
-
 
 }

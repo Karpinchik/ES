@@ -4,58 +4,50 @@ namespace models\model;
 
 class Model
 {
+    /**
+     * @var $name string
+     */
     public $name;
+
+    /**
+     * @var $email string
+     */
     public $email;
+
+    /**
+     * @var $message string
+     */
     public $message;
+
+    /**
+     * @var $name_image string
+     */
     public $name_image;
+
+    /**
+     * @var $folder_image string
+     */
     public $folder_image = "app/uploads/";
 
+    /**
+     * the models constructor
+     *
+     * @param $name string
+     * @param $email string
+     * @param $message string
+     * @param $name_image string
+     *
+     * return $this
+     */
     public function __construct($name, $email, $message, $name_image)
     {
         $this->name = $name;
         $this->email = $email;
         $this->message = $message;
         $this->name_image = $name_image;
-//        $this->folder_image = $folder_image;
+        return $this;
     }
 
-    public function get_reviews($id, $pdo)
-    {
-
-        $sql = "SELECT * FROM feed_back_tbl WHERE id=:id";
-        $stmt = $pdo->prepare($sql);
-
-        $params = [':id' => $id];
-
-        if ($result = $stmt->execute($params)) {
-            echo "ошибка получения записи";
-        } else {
-            return $result;
-        }
-
-
-        $sql = "SELECT * FROM feed_back_tbl WHERE id=";
-        $stmt = $pdo->query($sql);
-        return $stmt->fetchAll();
-    }
-
-//    /**
-//     * get display reviews
-//     *
-//     */
-//    static function get_display_reviews($pdo)
-//    {
-//        $sql = "SELECT * FROM feed_back_tbl WHERE display=1";
-//        $stmt = $pdo->query($sql);
-//        return $stmt->fetchAll();
-//    }
-//
-//    static function get_all_reviews($pdo)
-//    {
-//        $sql = "SELECT * FROM feed_back_tbl";
-//        $stmt = $pdo->query($sql);
-//        return $stmt->fetchAll();
-//    }
 
 }
 
